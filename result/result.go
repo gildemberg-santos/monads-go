@@ -5,21 +5,7 @@ type Result struct {
 	value  interface{}
 }
 
-func Success(value interface{}) *Result {
-	return &Result{
-		status: true,
-		value:  value,
-	}
-}
-
-func Failure(value interface{}) *Result {
-	return &Result{
-		status: false,
-		value:  value,
-	}
-}
-
-func (r *Result) IsSuccess() bool {
+func (r *Result) IsSuccessful() bool {
 	return r.status
 }
 
@@ -29,4 +15,27 @@ func (r *Result) IsFailure() bool {
 
 func (r *Result) GetValue() interface{} {
 	return r.value
+}
+
+func NewSuccess(values ...interface{}) *Result {
+	return &Result{
+		status: true,
+		value:  valueOf(values...),
+	}
+}
+
+func NewFailure(values ...interface{}) *Result {
+	return &Result{
+		status: false,
+		value:  valueOf(values...),
+	}
+}
+
+func valueOf(values ...interface{}) interface{} {
+	if len(values) == 1 {
+		return values[0]
+	} else if len(values) > 1 {
+		return values
+	}
+	return nil
 }

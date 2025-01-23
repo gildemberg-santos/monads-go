@@ -1,28 +1,32 @@
 package result
 
 type Result struct {
-	Status bool
-	Value  interface{}
+	status bool
+	value  interface{}
 }
 
 func Success(value interface{}) *Result {
 	return &Result{
-		Status: true,
-		Value:  value,
+		status: true,
+		value:  value,
 	}
 }
 
 func Failure(value interface{}) *Result {
 	return &Result{
-		Status: false,
-		Value:  value,
+		status: false,
+		value:  value,
 	}
 }
 
 func (r *Result) IsSuccess() bool {
-	return r.Status
+	return r.status
 }
 
 func (r *Result) IsFailure() bool {
-	return !r.Status
+	return !r.status
+}
+
+func (r *Result) GetValue() interface{} {
+	return r.value
 }

@@ -1,33 +1,43 @@
 package result
 
 type Result struct {
-	status bool
-	value  interface{}
+	isSuccess bool
+	value     interface{}
 }
 
-func (r *Result) IsSuccessful() bool {
-	return r.status
+func (r *Result) IsSuccess() bool {
+	return r.isSuccess
 }
 
 func (r *Result) IsFailure() bool {
-	return !r.status
+	return !r.isSuccess
 }
 
-func (r *Result) GetValue() interface{} {
-	return r.value
+func (r *Result) GetSuccess() interface{} {
+	if r.isSuccess {
+		return r.value
+	}
+	return nil
+}
+
+func (r *Result) GetFailure() interface{} {
+	if !r.isSuccess {
+		return r.value
+	}
+	return nil
 }
 
 func NewSuccess(values ...interface{}) *Result {
 	return &Result{
-		status: true,
-		value:  valueOf(values...),
+		isSuccess: true,
+		value:     valueOf(values...),
 	}
 }
 
 func NewFailure(values ...interface{}) *Result {
 	return &Result{
-		status: false,
-		value:  valueOf(values...),
+		isSuccess: false,
+		value:     valueOf(values...),
 	}
 }
 

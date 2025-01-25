@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	"github.com/gildemberg-santos/monads-go/maybe"
 	"github.com/gildemberg-santos/monads-go/result"
 )
 
@@ -14,6 +15,23 @@ func divide(a, b float64) *result.Result {
 }
 
 func main() {
+	// Maybe
+	someValue := maybe.NewSome("Hello, World!")
+	noneValue := maybe.NewNone()
+
+	if someValue.IsSome() {
+		fmt.Println("Some value:", someValue.GetValue())
+	} else {
+		fmt.Println("No value")
+	}
+
+	if noneValue.IsNone() {
+		fmt.Println("No value")
+	} else {
+		fmt.Println("Some value:", noneValue.GetValue())
+	}
+
+	// Result
 	successResult := divide(10, 2)
 	failureResult := divide(10, 0)
 

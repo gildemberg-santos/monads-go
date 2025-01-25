@@ -1,6 +1,4 @@
-package result
-
-import "github.com/gildemberg-santos/monads-go/maybe"
+package main
 
 type Result struct {
 	isSuccess bool
@@ -75,11 +73,11 @@ func (r *Result) Failure() interface{} {
 	panic("failure was called on Success")
 }
 
-func (r *Result) ToMaybe() *maybe.Maybe {
+func (r *Result) ToMaybe() *Maybe {
 	if r.IsSuccess() {
-		return maybe.NewSome(r.value)
+		return NewSome(r.value)
 	}
-	return maybe.NewNone()
+	return NewNone()
 }
 
 func (r *Result) Either(successFunc, failureFunc func(interface{}) interface{}) interface{} {

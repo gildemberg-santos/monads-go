@@ -1,4 +1,4 @@
-package main
+package maybe
 
 type Maybe struct {
 	isSome bool

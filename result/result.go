@@ -1,4 +1,4 @@
-package main
+package result
 
 type Result struct {
 	isSuccess bool
@@ -71,13 +71,6 @@ func (r *Result) Failure() interface{} {
 		return r.value
 	}
 	panic("failure was called on Success")
-}
-
-func (r *Result) ToMaybe() *Maybe {
-	if r.IsSuccess() {
-		return NewSome(r.value)
-	}
-	return NewNone()
 }
 
 func (r *Result) Either(successFunc, failureFunc func(interface{}) interface{}) interface{} {
